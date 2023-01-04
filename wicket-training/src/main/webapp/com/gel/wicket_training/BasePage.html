@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+	<head>
+		<meta charset="utf-8" />
+		<title>Apache Wicket Quickstart</title>
+		<link href='https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold' rel='stylesheet' type='text/css' />
+		<link rel="stylesheet" href="style.css" type="text/css" media="screen" title="Stylesheet" />
+	</head>
+<body>
+<div id="hd">
+    <a href="#" wicket:id="page1">Page1</a>
+    <a href="#" wicket:id="page2">Page2</a>
+</div>
+<div id="bd">
+<wicket:container wicket:id="hello">This will be replaced with Hello World....</wicket:container>
+<wicket:child>
+Content which is available between &lt; wicket:extend &gt; from other pages will be showing here....
+</wicket:child>
+</div>
+<div id="ft">
+	<span wicket:id="footer"></span>
+</div>
+</body>
+</html>
