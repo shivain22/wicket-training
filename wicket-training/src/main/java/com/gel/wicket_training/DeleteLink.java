@@ -21,8 +21,11 @@ public class DeleteLink extends Link<Person> {
 	public void onClick() {
 		// TODO Auto-generated method stub
 		PersonService personService = new PersonService();
+		personService.openSession();
 		personService.delete(person.getId());
+		personService.closeSession();
 		setResponsePage(Page1.class);
+		
 	}
 
 }
