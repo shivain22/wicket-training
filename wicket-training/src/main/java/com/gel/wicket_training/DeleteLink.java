@@ -23,8 +23,9 @@ public class DeleteLink extends Link<Person> {
 		PersonService personService = new PersonService();
 		personService.openSession();
 		personService.delete(person.getId());
-		setResponsePage(Page1.class);
 		personService.closeSession();
+		setResponsePage(Page1.class);
+		
 	}
 
 }
