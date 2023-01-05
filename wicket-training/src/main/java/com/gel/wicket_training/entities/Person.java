@@ -3,6 +3,7 @@ package com.gel.wicket_training.entities;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import org.apache.wicket.model.IModel;
@@ -40,16 +41,16 @@ public class Person implements Serializable  {
 	@Column(nullable = false, length = 100)
 	private String lastName;
 	
-	@OneToMany(mappedBy="person", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="person",orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<PersonMobileNumber> personMobileNumbers = new HashSet<PersonMobileNumber>(10);
 	
-	@OneToMany(mappedBy="person", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="person",orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<PersonEmail> personEmails = new HashSet<PersonEmail>(10);
 	
-	@OneToMany(mappedBy="person", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="person",orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<PersonAddress> personAddresses = new HashSet<PersonAddress>(10);
 
-	@OneToMany(mappedBy="person", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="person",orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<PersonBankAccount> personBankAccounts = new HashSet<PersonBankAccount>(10);
 	
 
@@ -176,6 +177,33 @@ public class Person implements Serializable  {
 		return false;
 	}
 
+	public void removeAllCollections() {
+		Iterator<PersonMobileNumber> it = personMobileNumbers.iterator();
+		while(it.hasNext()){
+			PersonMobileNumber pmn = it.next();
+			pmn.setPerson(null);
+			it.remove();
+		}
+		
+		Iterator<PersonEmail> it1 = personEmails.iterator();
+		while(it1.hasNext()){
+			PersonEmail pe = it1.next();
+			pe.setPerson(null);
+			it1.remove();
+		}
+		Iterator<PersonAddress> it2 = personAddresses.iterator();
+		while(it2.hasNext()){
+			PersonAddress pa = it2.next();
+			pa.setPerson(null);
+			it2.remove();
+		}
+		Iterator<PersonBankAccount> it3 = personBankAccounts.iterator();
+		while(it3.hasNext()){
+			PersonBankAccount pba=it3.next();
+			pba.setPerson(null);
+			it3.remove();
+		}
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

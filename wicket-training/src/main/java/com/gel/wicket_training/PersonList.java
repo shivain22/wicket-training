@@ -23,8 +23,9 @@ public class PersonList extends ListView<Person> {
 	@Override
 	protected void populateItem(ListItem<Person> item) {
 		Person person = item.getModelObject();
-		PersonService personService = WicketApplication.getPersonService();
-		person = personService.findById(person.getId());
+		PersonService ps = new PersonService();
+		ps.openSession();
+		person = ps.findById(person.getId());
 		item.add(new Label("lblFirstName",person.getFirstName()));
 		item.add(new Label("lblLastName",person.getLastName()));
 		List<PersonMobileNumber> mobileNumbers = new ArrayList<>();
@@ -47,6 +48,7 @@ public class PersonList extends ListView<Person> {
 		item.add(personBankAccountList);
 		item.add(new EditLink("editLink", item));
 		item.add(new DeleteLink("deleteLink",item));
+		ps.closeSession();
 	}
 
 }

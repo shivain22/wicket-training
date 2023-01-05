@@ -2,8 +2,12 @@ package com.gel.wicket_training.service;
 
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import com.gel.wicket_training.dao.PersonDao;
 import com.gel.wicket_training.entities.Person;
+import com.gel.wicket_training.hibernate.HibernateUtil;
 
 public class PersonService {
  
@@ -12,54 +16,43 @@ public class PersonService {
     public PersonService() {
     	personDao = new PersonDao();
     }
- 
+    
+    public Session openSession() {
+    	return personDao.openCurrentSessionwithTransaction();
+    }
+    
+    public void closeSession() {
+    	personDao.closeCurrentSessionwithTransaction();
+    }
+    
 	public Person persist(Person entity) {
-        personDao.openCurrentSessionwithTransaction();
         personDao.persist(entity);
-        personDao.closeCurrentSessionwithTransaction();
+        return entity;
+    }
+	public Person merge(Person entity) {
+        personDao.merge(entity);
         return entity;
     }
  
     public void update(Person entity) {
-        personDao.openCurrentSessionwithTransaction();
         personDao.update(entity);
-        personDao.closeCurrentSessionwithTransaction();
-    }
-
-    public void update1(Person entity) {
-        personDao.openCurrentSessionwithTransaction();
-        Person person = personDao.findById(entity.getId());
-        person.setFirstName(entity.getFirstName());
-        person.setLastName(entity.getLastName());
-        personDao.update(person);
-        personDao.closeCurrentSessionwithTransaction();
     }
     
     public Person findById(Long id) {
-        personDao.openCurrentSession();
-        Person book = personDao.findById(id);
-        personDao.closeCurrentSession();
-        return book;
+        return  personDao.findById(id);
     }
  
     public void delete(Long id) {
-        personDao.openCurrentSessionwithTransaction();
-        Person book = personDao.findById(id);
-        personDao.delete(book);
-        personDao.closeCurrentSessionwithTransaction();
+        Person person = personDao.findById(id);
+        personDao.delete(person);
     }
  
     public List<Person> findAll() {
-        personDao.openCurrentSession();
-        List<Person> books = personDao.findAll();
-        personDao.closeCurrentSession();
-        return books;
+        return personDao.findAll();
     }
  
     public void deleteAll() {
-        personDao.openCurrentSessionwithTransaction();
         personDao.deleteAll();
-        personDao.closeCurrentSessionwithTransaction();
     }
  
     public PersonDao personDao() {

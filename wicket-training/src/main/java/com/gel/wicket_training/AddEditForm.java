@@ -152,34 +152,72 @@ public class AddEditForm extends Form<AddEditForm> {
 
 	@Override
 	protected void onSubmit() {
-		PersonService personService = WicketApplication.getPersonService();
+		PersonService ps = new PersonService();
 		Person person = new Person();
 		if(personId.getInput()!=null && personId.getInput().trim().length()>0) {
-			person = personService.findById(Long.parseLong(personId.getInput()));
+			ps.openSession();
+			person = ps.findById(Long.parseLong(personId.getInput()));
+			person.removeAllCollections();
+			ps.merge(person);
+			ps.closeSession();
+			ps.openSession();
+			person = ps.findById(Long.parseLong(personId.getInput()));
+			person.setFirstName(firstName.getInput());
+			person.setLastName(lastName.getInput());
+			personMobileNumbers = (ArrayList<ListItem<PersonMobileNumber>>)personMobileNumberEditor.getDefaultModelObject();
+			for(ListItem<PersonMobileNumber> item:personMobileNumbers) {
+				PersonMobileNumber pmn = item.getModelObject();
+				pmn.setId(null);
+				person.addPersonMobileNumber(pmn);
+			}
+			personEmails = (ArrayList<ListItem<PersonEmail>>)personEmailEditor.getDefaultModelObject();
+			for(ListItem<PersonEmail> item:personEmails) {
+				PersonEmail pe = item.getModelObject();
+				pe.setId(null);
+				person.addPersonEmail(pe);
+			}
+			personAddresses = (ArrayList<ListItem<PersonAddress>>)personAddressEditor.getDefaultModelObject();
+			for(ListItem<PersonAddress> item:personAddresses) {
+				PersonAddress pa = item.getModelObject();
+				pa.setId(null);
+				person.addPersonAddress(pa);
+			}
+			personBankAccounts = (ArrayList<ListItem<PersonBankAccount>>) personBankAccountEditor.getDefaultModelObject();
+			for(ListItem<PersonBankAccount> item:personBankAccounts) {
+				PersonBankAccount pba = item.getModelObject();
+				pba.setId(null);
+				person.addPersonBankAccount(pba);
+			}
+			ps.update(person);
+			ps.closeSession();
+		
+		}else {
+			person.setFirstName(firstName.getInput());
+			person.setLastName(lastName.getInput());
+			personMobileNumbers = (ArrayList<ListItem<PersonMobileNumber>>)personMobileNumberEditor.getDefaultModelObject();
+			for(ListItem<PersonMobileNumber> item:personMobileNumbers) {
+				PersonMobileNumber pmn = item.getModelObject();
+				person.addPersonMobileNumber(pmn);
+			}
+			personEmails = (ArrayList<ListItem<PersonEmail>>)personEmailEditor.getDefaultModelObject();
+			for(ListItem<PersonEmail> item:personEmails) {
+				PersonEmail pe = item.getModelObject();
+				person.addPersonEmail(pe);
+			}
+			personAddresses = (ArrayList<ListItem<PersonAddress>>)personAddressEditor.getDefaultModelObject();
+			for(ListItem<PersonAddress> item:personAddresses) {
+				PersonAddress pa = item.getModelObject();
+				person.addPersonAddress(pa);
+			}
+			personBankAccounts = (ArrayList<ListItem<PersonBankAccount>>) personBankAccountEditor.getDefaultModelObject();
+			for(ListItem<PersonBankAccount> item:personBankAccounts) {
+				PersonBankAccount pba = item.getModelObject();
+				person.addPersonBankAccount(pba);
+			}
+			ps.openSession();
+			ps.persist(person);
+			ps.closeSession();
 		}
-		person.setFirstName(firstName.getInput());
-		person.setLastName(lastName.getInput());
-		personMobileNumbers = (ArrayList<ListItem<PersonMobileNumber>>)personMobileNumberEditor.getDefaultModelObject();
-		for(ListItem<PersonMobileNumber> item:personMobileNumbers) {
-			PersonMobileNumber pmn = item.getModelObject();
-			person.addPersonMobileNumber(pmn);
-		}
-		personEmails = (ArrayList<ListItem<PersonEmail>>)personEmailEditor.getDefaultModelObject();
-		for(ListItem<PersonEmail> item:personEmails) {
-			PersonEmail pe = item.getModelObject();
-			person.addPersonEmail(pe);
-		}
-		personAddresses = (ArrayList<ListItem<PersonAddress>>)personAddressEditor.getDefaultModelObject();
-		for(ListItem<PersonAddress> item:personAddresses) {
-			PersonAddress pa = item.getModelObject();
-			person.addPersonAddress(pa);
-		}
-		personBankAccounts = (ArrayList<ListItem<PersonBankAccount>>) personBankAccountEditor.getDefaultModelObject();
-		for(ListItem<PersonBankAccount> item:personBankAccounts) {
-			PersonBankAccount pba = item.getModelObject();
-			person.addPersonBankAccount(pba);
-		}
-		personService.persist(person);
 		setResponsePage(Page1.class);
 		super.onSubmit();
 	}
