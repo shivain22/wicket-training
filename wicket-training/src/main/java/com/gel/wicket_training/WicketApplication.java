@@ -15,20 +15,11 @@ public class WicketApplication extends  WebApplication{
 		// TODO Auto-generated method stub
 		return BasePage.class;
 	}
-	private static PersonService personService;
 	
-	public static PersonService getPersonService() {
-		if(personService==null) {
-			personService = new PersonService();
-		}
-		return personService;
-	}
 	@Override
 	public void init()
 	{
 		super.init();
-		personService = new PersonService();
-		// needed for the styling used by the quickstart
 		getCspSettings().blocking()
 			.add(CSPDirective.STYLE_SRC, CSPDirectiveSrcValue.SELF)
 			.add(CSPDirective.STYLE_SRC, CSPDirectiveSrcValue.UNSAFE_INLINE)
@@ -37,10 +28,9 @@ public class WicketApplication extends  WebApplication{
 			.add(CSPDirective.SCRIPT_SRC, CSPDirectiveSrcValue.UNSAFE_EVAL)
 			.add(CSPDirective.STYLE_SRC, "https://fonts.googleapis.com/css")
 			.add(CSPDirective.FONT_SRC, "https://fonts.gstatic.com");
-
+		getCspSettings().blocking().disabled();
 		getResourceSettings().getResourceFinders().
 	    add(new WebApplicationPath(getServletContext(),"/"));
-		// add your configuration here
 	}
 
 }

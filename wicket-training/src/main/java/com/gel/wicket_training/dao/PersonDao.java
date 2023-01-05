@@ -15,7 +15,7 @@ public class PersonDao implements IPersonDao<Person, Long> {
 	private Transaction currentTransaction;
 
 	public PersonDao() {
-		openCurrentSession();
+		
 	}
 
 	public Session openCurrentSession() {
@@ -59,7 +59,7 @@ public class PersonDao implements IPersonDao<Person, Long> {
 	}
 
 	public void update(Person entity) {
-		getCurrentSession().persist(entity);
+		getCurrentSession().update(entity);
 	}
 
 	public Person findById(Long id) {
@@ -81,5 +81,8 @@ public class PersonDao implements IPersonDao<Person, Long> {
 		for (Person entity : entityList) {
 			delete(entity);
 		}
+	}
+	public void merge(Person person) {
+		getCurrentSession().merge(person);
 	}
 }

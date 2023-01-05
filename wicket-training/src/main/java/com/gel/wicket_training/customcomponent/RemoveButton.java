@@ -28,8 +28,8 @@ public class RemoveButton extends EditorButton
         int i=0;
         System.out.println("Index of removing item="+idx);
     	while(it1.hasNext()) {
-    		it1.next();
-    		if(i==idx) {
+    		ListItem li= (ListItem) it1.next();
+    		if(li.getIndex()==idx) {
     			System.out.println("Editor item removed -"+i);
     			it1.remove();
     		}

@@ -17,15 +17,17 @@ import com.gel.wicket_training.service.PersonService;
 public class Page1 extends BasePage {
 	
 	public Page1(final PageParameters page) throws Exception{
-		PersonService personService = WicketApplication.getPersonService();
-		List<Person> persons = personService.findAll();
+		PersonService ps = new PersonService();
+		ps.openSession();
+		List<Person> persons = ps.findAll();
 		List<StringValue> personIds = page.getValues("person_id");
 		Person person=new Person();
 		if(personIds.size()>0) {
-		 person = personService.findById(personIds.get(0).toLong());
+		 person = ps.findById(personIds.get(0).toLong());
 		}
 		AddEditForm addEditForm = new AddEditForm("addForm", person);
 		add(addEditForm);
 		add(new PersonList("personList", persons));
+		ps.closeSession();
 	}
 }
