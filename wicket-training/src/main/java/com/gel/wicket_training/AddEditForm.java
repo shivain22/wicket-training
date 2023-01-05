@@ -1,15 +1,23 @@
 package com.gel.wicket_training;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.apache.wicket.Component;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.HiddenField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 
@@ -31,6 +39,8 @@ public class AddEditForm extends Form<AddEditForm> {
 		this.actionCounts = actionCounts;
 	}
 
+	
+	
 	TextField firstName;
 	TextField lastName ;
 	HiddenField personId;
@@ -47,6 +57,44 @@ public class AddEditForm extends Form<AddEditForm> {
 	public AddEditForm(String id,Person person) {
 		super(id);
 		setDefaultModel(new CompoundPropertyModel<>(this));
+		Model<String> model = new Model<String>() {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            private String currentTime = sdf.format(new Date());
+            public String getObject() {
+            	currentTime = sdf.format(new Date());
+                return currentTime;
+            }
+        };
+		
+		Label currentTimeLbl = new Label("currentTime",model);
+		Button currentTimeBtn = new Button("currentTimeBtn") {
+			public void onSubmit() {
+			
+			}
+		}.setDefaultFormProcessing(false); 
+		
+		add(new AjaxFallbackLink("link") {
+            public void onClick(AjaxRequestTarget target) {
+                if (target != null) {
+                    // target is only available in an Ajax request
+                    target.addComponent(currentTimeLbl);
+                }
+            }
+
+			@Override
+			public Component setDefaultModel(IModel model) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public void onClick(Optional target) {
+				if (target.isPresent()) {
+                    // target is only available in an Ajax request
+                    (AjaxRequestTarget)target.get().addComponent(currentTimeLbl);
+                }
+			}
+        });
 		
 		personId  = new HiddenField("personId",new PropertyModel<>(person, "id"));
 		firstName  = new TextField("firstName",new PropertyModel<>(person, "firstName"));
@@ -148,6 +196,9 @@ public class AddEditForm extends Form<AddEditForm> {
             	actionCounts++;
             }
         }.setDefaultFormProcessing(false));
+		
+		add(currentTimeLbl);
+		add(currentTimeBtn);
 	}
 
 	@Override
