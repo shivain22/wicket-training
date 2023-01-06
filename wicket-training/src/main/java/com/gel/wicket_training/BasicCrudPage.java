@@ -2,6 +2,7 @@ package com.gel.wicket_training;
 
 import java.util.List;
 
+import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.util.string.StringValue;
 
@@ -14,7 +15,6 @@ public class BasicCrudPage extends IndexPage {
 	
 	public BasicCrudPage(final PageParameters page) throws Exception{
 		
-		
 		PersonService ps = new PersonService();
 		ps.openSession();
 		List<Person> persons = ps.findAll();
@@ -24,11 +24,11 @@ public class BasicCrudPage extends IndexPage {
 		 person = ps.findById(personIds.get(0).toLong());
 		}
 		AddEditForm addEditForm = new AddEditForm("addForm", person);
-		add(addEditForm);
 		PersonList personList= new PersonList("personList", persons);
 		personList.setOutputMarkupId(true);
-		add(personList);
-		
+		addEditForm.setOutputMarkupId(true);
+		addEditForm.add(personList);
+		add(addEditForm);
 		ps.closeSession();
 	}
 }

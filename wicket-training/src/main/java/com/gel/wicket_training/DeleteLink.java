@@ -2,6 +2,7 @@ package com.gel.wicket_training;
 
 import java.util.List;
 
+import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.list.ListItem;
@@ -34,7 +35,7 @@ public class DeleteLink extends AjaxLink<Person> {
 		List<Person> persons = ps.findAll();
 		personList.setPersons(persons);
 		ps.closeSession();
-		target.add(personList);
+		target.add(getParent().getParent().getParent());
 	}
 
 }
