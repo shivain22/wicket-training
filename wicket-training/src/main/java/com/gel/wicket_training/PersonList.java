@@ -47,8 +47,12 @@ public class PersonList extends ListView<Person> {
 		item.add(personEmailList);
 		item.add(personBankAccountList);
 		item.add(new EditLink("editLink", item));
-		item.add(new DeleteLink("deleteLink",item));
+		item.add(new DeleteLink("deleteLink",item,this));
 		ps.closeSession();
+	}
+	
+	public void setPersons(List<Person> persons) {
+		super.setModelObject(persons);
 	}
 
 }

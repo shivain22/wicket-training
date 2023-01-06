@@ -1,6 +1,7 @@
 package com.gel.wicket_training;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -31,11 +32,13 @@ import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.settings.ExceptionSettings;
 import org.apache.wicket.settings.RequestCycleSettings;
 
+import com.gel.wicket_training.entities.Person;
+
 public class AjaxPage extends IndexPage {
 	private int counter1 = 0;
 	private int counter2 = 0;
 	private int counter3 = 0;
-
+	private String str = "Test";
 	
 	public int getCounter1()
 	{
@@ -120,8 +123,12 @@ public class AjaxPage extends IndexPage {
 
 		add(clientInfo, clientTime);
 	
+		Person person = new Person();
+		person.setFirstName("Siva");
+		person.setLastName("Kumar");
+		person.setId(1l);
 		
-		final Label c1 = new Label("c1", new PropertyModel<>(this, "counter1"));
+		final Label c1 = new Label("c1", new PropertyModel<>(this,"str"));
 		c1.setOutputMarkupId(true);
 		add(c1);
 
@@ -139,6 +146,10 @@ public class AjaxPage extends IndexPage {
 			public void onClick(AjaxRequestTarget target)
 			{
 				counter1++;
+				person.setFirstName("First Me-"+counter1);
+				person.setLastName("Last Me-"+counter1);
+				person.setId(Long.valueOf(counter1));
+				str = String.valueOf(counter1);
 				target.add(c1);
 			}
 		});
@@ -266,9 +277,36 @@ public class AjaxPage extends IndexPage {
 				// note: will be set until the "failure" link is clicked or the application is
 				// restarted
 				getApplication().getExceptionSettings().setAjaxErrorHandlingStrategy(
-					ExceptionSettings.AjaxErrorStrategy.REDIRECT_TO_ERROR_PAGE);
+					ExceptionSettings.AjaxErrorStrategy.INVOKE_FAILURE_HANDLER);
 
 				throw new RuntimeException("test whether the exception handling works");
+			}
+			
+			@Override
+			protected void updateAjaxAttributes(AjaxRequestAttributes attributes)
+			{
+				super.updateAjaxAttributes(attributes);
+				
+				IAjaxCallListener ajaxCallListener = new AjaxCallListener() {
+					@Override
+					public CharSequence getBeforeHandler(Component component)
+					{
+						return "alert('Before ajax call');";
+					}
+
+					@Override
+					public CharSequence getSuccessHandler(Component component)
+					{
+						return "alert('Success');";
+					}
+
+					@Override
+					public CharSequence getFailureHandler(Component component)
+					{
+						return "alert('Failure');";
+					}
+				};
+				attributes.getAjaxCallListeners().add(ajaxCallListener);
 			}
 		});
 	

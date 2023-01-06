@@ -42,8 +42,7 @@ public class PersonService {
         return  personDao.findById(id);
     }
  
-    public void delete(Long id) {
-        Person person = personDao.findById(id);
+    public void delete(Person person) {
         personDao.delete(person);
     }
  

@@ -1,28 +1,40 @@
 package com.gel.wicket_training;
 
-import org.apache.wicket.markup.html.link.Link;
+import java.util.List;
+
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.list.ListItem;
 
 import com.gel.wicket_training.entities.Person;
 import com.gel.wicket_training.service.PersonService;
 
-public class DeleteLink extends Link<Person> {
+public class DeleteLink extends AjaxLink<Person> {
 
 	ListItem item;
 	Person person;
-	public DeleteLink(String id, ListItem<Person> item) {
+	PersonList personList;
+	public DeleteLink(String id, ListItem<Person> item,PersonList personList) {
 		super(id);
 		this.item = item;
 		this.person=item.getModelObject();
-		// TODO Auto-generated constructor stub
+		this.personList = personList;
 	}
 
+	
 	@Override
-	public void onClick() {
+	public void onClick(AjaxRequestTarget target) {
 		// TODO Auto-generated method stub
-		PersonService personService = new PersonService();
-		personService.delete(person.getId());
-		setResponsePage(BasicCrudPage.class);
+		PersonService ps = new PersonService();
+		ps.openSession();
+		person = ps.findById(person.getId());
+		ps.delete(person);
+		ps.closeSession();
+		ps.openSession();
+		List<Person> persons = ps.findAll();
+		personList.setPersons(persons);
+		ps.closeSession();
+		target.add(personList);
 	}
 
 }
