@@ -3,11 +3,11 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 
-public  class BasePage extends WebPage {
-	public BasePage() {
-		add(new BookmarkablePageLink("page1", Page1.class));
-		add(new BookmarkablePageLink("page2", Page2.class));
+public  class IndexPage extends WebPage {
+	public IndexPage() {
+		add(new BookmarkablePageLink("basicCrudPage", BasicCrudPage.class));
+		add(new BookmarkablePageLink("ajaxPage", AjaxPage.class));
 		add(new Label("footer", "This is the footer"));
-		add(new Label("hello","Hello World...."));
+		add(new Label("hello","Apache Wicket Training"));
 	}
 }

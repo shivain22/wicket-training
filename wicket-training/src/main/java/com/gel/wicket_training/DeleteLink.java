@@ -22,7 +22,7 @@ public class DeleteLink extends Link<Person> {
 		// TODO Auto-generated method stub
 		PersonService personService = new PersonService();
 		personService.delete(person.getId());
-		setResponsePage(Page1.class);
+		setResponsePage(BasicCrudPage.class);
 	}
 
 }

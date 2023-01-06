@@ -9,12 +9,14 @@
 	</head>
 <body>
 <div id="hd">
-    <a href="#" wicket:id="page1">Page1</a>
-    <a href="#" wicket:id="page2">Page2</a>
+    <a href="#" wicket:id="basicCrudPage"><span style="color: white;"><b>Basic CRUD</b></span></a> &nbsp;
+    <span style="color: white;"><b>|</b></span>&nbsp;
+    <a href="#" wicket:id="ajaxPage"><span style="color: white;"><b>Ajax Page</b></span></a>
 </div>
 <div id="bd">
-<wicket:container wicket:id="hello">This will be replaced with Hello World....</wicket:container>
+<wicket:container wicket:id="hello"></wicket:container>
 <wicket:child>
+Example for &lt; wicket:child &gt; component
 Content which is available between &lt; wicket:extend &gt; from other pages will be showing here....
 </wicket:child>
 </div>

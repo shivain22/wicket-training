@@ -20,6 +20,6 @@ public class EditLink extends Link<Void> {
 	public void onClick() {
 		PageParameters pp = new PageParameters();
 		pp.add("person_id", person.getId());
-		setResponsePage(Page1.class,pp);
+		setResponsePage(BasicCrudPage.class,pp);
 	}
 }

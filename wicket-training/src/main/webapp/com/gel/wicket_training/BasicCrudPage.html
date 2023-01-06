@@ -6,7 +6,7 @@
 <body>
 
 	<wicket:extend>
-	
+
 
 		<h4>List of Persons</h4>
 		<table border="1" class="formTable">
@@ -53,25 +53,26 @@
 							</tr>
 						</table>
 					</td>
-					<td><a wicket:id="editLink">Edit</a> /<a 
+					<td><a wicket:id="editLink">Edit</a> /<a
 						wicket:id="deleteLink">Delete</a></td>
 				</tr>
 			</tbody>
 		</table>
 		<br />
-		
-		
-	
+
+
+
 		<form action="" wicket:id="addForm">
-		<input type="submit" wicket:id="currentTimeBtn" value="Click for current Time"/>
-	<div wicket:id="currentTime"></div>
+
+
 			<table id="mainTable" class="formTable">
 				<tr>
 					<td colspan="2" align="center">Add new Person Data</td>
 				</tr>
 				<tr>
 					<td>First Name</td>
-					<td><input type="hidden" wicket:id="personId"/><input wicket:id="firstName" /></td>
+					<td><input type="hidden" wicket:id="personId" /><input
+						wicket:id="firstName" /></td>
 				</tr>
 				<tr>
 					<td>Last Name</td>
@@ -79,49 +80,56 @@
 				</tr>
 			</table>
 			<br />
-			<table id="mobileNumberTable"  class="formTable">
+			<table id="mobileNumberTable" class="formTable">
 				<tr>
 					<td colspan="3" align="center">Add Mobile Numbers</td>
 				</tr>
 				<tr>
-					<td align="center" colspan="3"><input type="submit" wicket:id="addMobileNumber" value="Click to Add New" /></td>
+					<td align="center" colspan="3"><input type="submit"
+						wicket:id="addMobileNumber" value="Click to Add New" /></td>
 				</tr>
 				<tr wicket:id="personMobileNumbers">
-					<td><input type="hidden" wicket:id="id" /><span wicket:id="lblMobileNumber"></span></td>
+					<td><input type="hidden" wicket:id="id" /><span
+						wicket:id="lblMobileNumber"></span></td>
 					<td><input type="text" wicket:id="mobileNumber" /></td>
 					<td><input type="submit" wicket:id="remove" value="Remove" /></td>
 				</tr>
 			</table>
 			<br />
-			<table id="emailTable"  class="formTable">
+			<table id="emailTable" class="formTable">
 				<tr>
 					<td colspan="3" align="center">Add Emails</td>
 				</tr>
 				<tr>
-					<td align="center" colspan="3"><input type="submit" wicket:id="addEmail" value="Click to Add New" /></td>
+					<td align="center" colspan="3"><input type="submit"
+						wicket:id="addEmail" value="Click to Add New" /></td>
 				</tr>
-				<tr wicket:id="personEmails"  class="formTables">
-					<td><input type="hidden" wicket:id="id" /><span wicket:id="lblEmail"> </span></td>
+				<tr wicket:id="personEmails" class="formTables">
+					<td><input type="hidden" wicket:id="id" /><span
+						wicket:id="lblEmail"> </span></td>
 					<td><input type="text" wicket:id="email" /></td>
 					<td><input type="submit" wicket:id="remove" value="Remove" /></td>
 				</tr>
 			</table>
-			
+
 			<br />
 			<table id="addressTable" class="formTable">
 				<tr>
 					<td align="center">Add Addresses</td>
 				</tr>
 				<tr>
-					<td align="center" colspan="3"><input type="submit" wicket:id="addAddress" value="Click to Add New" /></td>
+					<td align="center" colspan="3"><input type="submit"
+						wicket:id="addAddress" value="Click to Add New" /></td>
 				</tr>
 				<tr wicket:id="personAddresses">
-					<td>	
+					<td>
 						<table id="addressInnerTable" class="formTable">
 							<tr>
-								<td><input type="hidden" wicket:id="id" /><span wicket:id="lblAddressLine"> </span></td>
+								<td><input type="hidden" wicket:id="id" /><span
+									wicket:id="lblAddressLine"> </span></td>
 								<td><input type="text" wicket:id="addressLine" /></td>
-								<td rowspan="5"><input type="submit" wicket:id="remove" value="Remove" /></td>
+								<td rowspan="5"><input type="submit" wicket:id="remove"
+									value="Remove" /></td>
 							</tr>
 							<tr>
 								<td><span wicket:id="lblCountry"> </span></td>
@@ -139,7 +147,7 @@
 								<td><span wicket:id="lblPin"> </span></td>
 								<td><input type="text" wicket:id="pin" /></td>
 							</tr>
-							
+
 						</table>
 					</td>
 				</tr>
@@ -172,10 +180,11 @@
 					</td>
 				</tr>
 			</table>
-			<br/>
+			<br />
 			<table id="submitFormTable" class="formTable">
 				<tr>
-					<td align="center"><input type="submit" value="Save Person with Details.." /></td>
+					<td align="center"><input type="submit"
+						value="Save Person with Details.." /></td>
 				</tr>
 			</table>
 		</form>

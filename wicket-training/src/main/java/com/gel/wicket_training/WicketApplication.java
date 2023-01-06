@@ -6,14 +6,12 @@ import org.apache.wicket.csp.CSPDirective;
 import org.apache.wicket.csp.CSPDirectiveSrcValue;
 import org.apache.wicket.protocol.http.WebApplication;
 
-import com.gel.wicket_training.service.PersonService;
-
 public class WicketApplication extends  WebApplication{
 
 	@Override
 	public Class<? extends Page> getHomePage() {
 		// TODO Auto-generated method stub
-		return BasePage.class;
+		return IndexPage.class;
 	}
 	
 	@Override

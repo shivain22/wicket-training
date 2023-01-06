@@ -1,27 +1,16 @@
 package com.gel.wicket_training;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
-import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.form.Button;
-import org.apache.wicket.markup.html.list.ListItem;
-import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.Model;
-import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.util.string.StringValue;
 
 import com.gel.wicket_training.entities.Person;
-import com.gel.wicket_training.entities.PersonAddress;
-import com.gel.wicket_training.entities.PersonEmail;
-import com.gel.wicket_training.entities.PersonMobileNumber;
 import com.gel.wicket_training.service.PersonService;
 
-public class Page1 extends BasePage {
+public class BasicCrudPage extends IndexPage {
 	
-	public Page1(final PageParameters page) throws Exception{
+	public BasicCrudPage(final PageParameters page) throws Exception{
 		
 		
 		PersonService ps = new PersonService();
