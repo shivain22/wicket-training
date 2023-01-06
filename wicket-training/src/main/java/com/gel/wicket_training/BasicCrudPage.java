@@ -10,6 +10,8 @@ import com.gel.wicket_training.service.PersonService;
 
 public class BasicCrudPage extends IndexPage {
 	
+	PersonList personList;
+	
 	public BasicCrudPage(final PageParameters page) throws Exception{
 		
 		
@@ -23,7 +25,9 @@ public class BasicCrudPage extends IndexPage {
 		}
 		AddEditForm addEditForm = new AddEditForm("addForm", person);
 		add(addEditForm);
-		add(new PersonList("personList", persons));
+		PersonList personList= new PersonList("personList", persons);
+		personList.setOutputMarkupId(true);
+		add(personList);
 		
 		ps.closeSession();
 	}

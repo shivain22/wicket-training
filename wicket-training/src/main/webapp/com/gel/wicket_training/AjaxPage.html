@@ -14,12 +14,12 @@
 		<p>
 			<span wicket:id="clienttime">client time info here</span>
 		</p>
-    <br />
+    
  
  <table class="formTable" style="width:50%;">
  	<tr>
  		<td>Counter 1: <span wicket:id="c1"></span></td>
- 		<td><a href="#" wicket:id="c1-link">increment</a></td>
+ 		<td><a href="#" wicket:id="c1-link">increment</a> <a href="#" wicket:id="set-response-page">Reload The Page.</a></td>
  		<td>Ajax-only link.</td>
  	</tr>
  	<tr>
@@ -43,15 +43,13 @@
  		<td><a href="#" wicket:id="failure-link">Failure</a> </td>
  		<td>Will trigger the onfailure javascript</td>
  	</tr>
- 	<tr>
- 		<td><a href="#" wicket:id="set-response-page">Redirect</a></td>
- 		<td>Break out of ajax and redirect to a new page</td>
- 	</tr>
+ 	
  	<tr>
  		<td><a href="#" wicket:id="exception">exception</a></td>
  		<td>Test exception handling</td>
  	</tr>
- </table>   
+ </table>
+ <br /> <br />   
     <wicket:child>
     
     </wicket:child>

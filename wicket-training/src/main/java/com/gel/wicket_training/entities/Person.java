@@ -236,4 +236,11 @@ public class Person implements Serializable  {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Person [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
+	}
+	
+	
 }
