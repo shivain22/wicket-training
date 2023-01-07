@@ -43,8 +43,10 @@ public class SortablePersonDataProvider extends SortableDataProvider<Person, Str
 	@Override
 	public Iterator<Person> iterator(long first, long count)
 	{
+		this.first=(int)first;
+		this.count=(int)count;
 		personService.openSession();
-		this.persons = personService.findAll();
+		this.persons = personService.findAll(getSort(),(int)first,(int)count,personFilter);
 		personService.closeSession();
 		return persons.iterator();
 	}
@@ -52,9 +54,10 @@ public class SortablePersonDataProvider extends SortableDataProvider<Person, Str
 	@Override
 	public long size()
 	{
-		if(persons.size()==0)
-			return this.totalRows;
-		return persons.size();
+		personService.openSession();
+		Long size = personService.countAll(getSort(),first,count,personFilter);
+		personService.closeSession();
+		return size;
 	}
 
 	@Override

@@ -79,8 +79,8 @@ public class DataTablePage extends IndexPage
 	            item.add(new PersonBankAccountsCellPanel(componentId, model));
 	        }
 	    });
-		SortablePersonDataProvider dataProvider = new SortablePersonDataProvider(1,100);
-		DataTable<Person, String> dataTable = new DefaultDataTable<>("table", columns, dataProvider, 100);
+		SortablePersonDataProvider dataProvider = new SortablePersonDataProvider(1,10);
+		DataTable<Person, String> dataTable = new DefaultDataTable<>("table", columns, dataProvider, 10);
 		
 		FilterForm<PersonFilter> personFilter = new FilterForm<>("personFilter", dataProvider);
 		

@@ -24,8 +24,9 @@ public class HibernateUtil {
       if (sessionFactory == null) {
           try {
               Properties settings = new Properties();
-              settings.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-              settings.put(Environment.URL, "jdbc:mysql://localhost:3305/wicket_training?useSSL=false");
+              
+              settings.put(Environment.DRIVER, "com.p6spy.engine.spy.P6SpyDriver");
+              settings.put(Environment.URL, "jdbc:p6spy:mysql://localhost:3305/wicket_training?useSSL=false");
               settings.put(Environment.USER, "root");
               settings.put(Environment.PASS, "");
               settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");

@@ -129,10 +129,38 @@ public class PersonDao implements IPersonDao<Person, Long>, Serializable {
 			cr.orderBy(cb.desc(root.get(column)));
 		cr.select(root);
 		Query<Person> query = getCurrentSession().createQuery(cr);
-		//query.setFirstResult(first);
-		//query.setMaxResults(count);
+		query.setFirstResult(first);
+		query.setMaxResults(count);
 		List<Person> persons = query.getResultList();
 		return persons;
+	}
+	
+	public Long countAll(String orderBy, String column, int first, int count,PersonFilter personFilter) {
+		CriteriaBuilder cb = getCurrentSession().getCriteriaBuilder();
+		List<Predicate> predicates = new ArrayList<>();
+		CriteriaQuery<Long> cr = cb.createQuery(Long.class);
+		Root<Person> root = cr.from(Person.class);
+		if(personFilter!=null) {
+			if(personFilter.getFirstName()!=null && personFilter.getFirstName().trim().length()>0) {
+				Predicate p = cb.like(root.get("firstName"), "%"+personFilter.getFirstName()+"%");
+				predicates.add(p);
+			}
+			if(personFilter.getLastName()!=null && personFilter.getLastName().trim().length()>0) {
+				Predicate p = cb.like(root.get("lastName"), "%"+personFilter.getLastName()+"%");
+				predicates.add(p);
+			}
+		}
+		if(predicates.size()>0) {
+			cr.where(predicates.toArray(new Predicate[] {}));
+		}
+		if(orderBy.equals("asc"))
+			cr.orderBy(cb.asc(root.get(column)));
+		else
+			cr.orderBy(cb.desc(root.get(column)));
+		cr.select(cb.count(root));
+		Query<Long> query = getCurrentSession().createQuery(cr);
+		List<Long> totalRows = query.getResultList();
+		return totalRows.get(0);
 	}
 
 	public void deleteAll() {

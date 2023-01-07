@@ -74,6 +74,14 @@ public class PersonService implements Serializable {
     	}
         return personDao.findAll(sortOrder,s.getProperty().toString(), first, count,personFilter);
     }
+    
+    public Long countAll(SortParam s, int first, int count,PersonFilter personFilter) {
+    	String sortOrder = "asc";
+    	if(!s.isAscending()) {
+    		sortOrder="desc";
+    	}
+        return personDao.countAll(sortOrder,s.getProperty().toString(), first, count,personFilter);
+    }
  
     public void deleteAll() {
         personDao.deleteAll();

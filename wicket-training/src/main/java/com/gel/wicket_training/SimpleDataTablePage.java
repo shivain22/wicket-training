@@ -38,7 +38,7 @@ public class SimpleDataTablePage extends IndexPage {
 			}
 		});
 		SortablePersonDataProvider dataProvider = new SortablePersonDataProvider();
-		DefaultDataTable table = new DefaultDataTable("simpleDataTable", columns,dataProvider, 5);
+		DefaultDataTable table = new DefaultDataTable("simpleDataTable", columns,dataProvider, 10);
 		add(table);
 	}
 }
