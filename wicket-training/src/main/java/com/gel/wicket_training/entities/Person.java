@@ -21,7 +21,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table
-public class Person implements Serializable  {
+public class Person implements Serializable,IModel<Person>  {
 	
 	public Person() {
 		this.firstName="";
@@ -240,6 +240,12 @@ public class Person implements Serializable  {
 	@Override
 	public String toString() {
 		return "Person [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
+	}
+
+	@Override
+	public Person getObject() {
+		// TODO Auto-generated method stub
+		return this;
 	}
 	
 	

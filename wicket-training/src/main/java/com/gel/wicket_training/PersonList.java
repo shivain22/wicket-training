@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
-import org.apache.wicket.markup.repeater.RepeatingView;
-import org.apache.wicket.model.Model;
 
 import com.gel.wicket_training.entities.Person;
 import com.gel.wicket_training.entities.PersonEmail;
@@ -16,8 +14,10 @@ import com.gel.wicket_training.service.PersonService;
 
 public class PersonList extends ListView<Person> {
 
+	
 	public PersonList(String id,List<Person> persons) {
 		super(id,persons);
+		
 	}
 
 	@Override
@@ -51,6 +51,8 @@ public class PersonList extends ListView<Person> {
 		ps.closeSession();
 	}
 	
+	
+
 	public void setPersons(List<Person> persons) {
 		super.setModelObject(persons);
 	}

@@ -1,5 +1,6 @@
 package com.gel.wicket_training;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -13,6 +14,9 @@ public class PersonAddressList extends ListView<PersonAddress> {
 
 	public PersonAddressList(String id,Set<PersonAddress> model) {
 		super(id,model.stream().collect(Collectors.toList()));
+	}
+	public PersonAddressList(String id,List<PersonAddress> model) {
+		super(id,model);
 	}
 
 	@Override

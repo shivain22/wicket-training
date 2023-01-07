@@ -9,62 +9,58 @@
 
 
 		<h4>List of Persons</h4>
-		<table border="1" class="formTable">
-			<thead>
-				<tr>
-					<td>First Name</td>
-					<td>Last Name</td>
-					<td>Mobile Numbers</td>
-					<td>Email</td>
-					<td>Addresses</td>
-					<td>Bank Accounts</td>
-					<td>Action</td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr wicket:id="personList">
-					<td wicket:id="lblFirstName"></td>
-					<td wicket:id="lblLastName"></td>
-					<td>
-						<table class="formTable">
-							<tr wicket:id="mobileNumbers">
-								<td wicket:id="mobileNumber"></td>
-							</tr>
-						</table>
-					</td>
-					<td>
-						<table class="formTable">
-							<tr wicket:id="emails">
-								<td wicket:id="email"></td>
-							</tr>
-						</table>
-					</td>
-					<td>
-						<table class="formTable">
-							<tr wicket:id="addresses">
-								<td><span wicket:id="address"></span></td>
-							</tr>
-						</table>
-					</td>
-					<td>
-						<table class="formTable">
-							<tr wicket:id="bankAccounts">
-								<td><span wicket:id="bankAccount"></span></td>
-							</tr>
-						</table>
-					</td>
-					<td><a wicket:id="editLink">Edit</a> /<a
-						wicket:id="deleteLink">Delete</a></td>
-				</tr>
-			</tbody>
-		</table>
-		<br />
-
-
-
+		
 		<form action="" wicket:id="addForm">
-
-
+<table border="1" class="formTable">
+				<thead>
+					<tr>
+						<td>First Name</td>
+						<td>Last Name</td>
+						<td>Mobile Numbers</td>
+						<td>Email</td>
+						<td>Addresses</td>
+						<td>Bank Accounts</td>
+						<td>Action</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr wicket:id="personList">
+						<td wicket:id="lblFirstName"></td>
+						<td wicket:id="lblLastName"></td>
+						<td>
+							<table class="formTable">
+								<tr wicket:id="mobileNumbers">
+									<td wicket:id="mobileNumber"></td>
+								</tr>
+							</table>
+						</td>
+						<td>
+							<table class="formTable">
+								<tr wicket:id="emails">
+									<td wicket:id="email"></td>
+								</tr>
+							</table>
+						</td>
+						<td>
+							<table class="formTable">
+								<tr wicket:id="addresses">
+									<td><span wicket:id="address"></span></td>
+								</tr>
+							</table>
+						</td>
+						<td>
+							<table class="formTable">
+								<tr wicket:id="bankAccounts">
+									<td><span wicket:id="bankAccount"></span></td>
+								</tr>
+							</table>
+						</td>
+						<td><a wicket:id="editLink">Edit</a> /<a
+							wicket:id="deleteLink">Delete</a></td>
+					</tr>
+				</tbody>
+			</table>
+<br />
 			<table id="mainTable" class="formTable">
 				<tr>
 					<td colspan="2" align="center">Add new Person Data</td>
