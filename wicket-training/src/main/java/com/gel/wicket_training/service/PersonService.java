@@ -1,17 +1,22 @@
 package com.gel.wicket_training.service;
 
+import java.io.Serializable;
 import java.util.List;
 
+import org.apache.wicket.extensions.markup.html.repeater.util.SortParam;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
+import com.gel.wicket_training.PersonFilter;
 import com.gel.wicket_training.dao.PersonDao;
 import com.gel.wicket_training.entities.Person;
-import com.gel.wicket_training.hibernate.HibernateUtil;
 
-public class PersonService {
+public class PersonService implements Serializable {
  
-    private static PersonDao personDao;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1441487094322189099L;
+	private static PersonDao personDao;
  
     public PersonService() {
     	personDao = new PersonDao();
@@ -48,6 +53,26 @@ public class PersonService {
  
     public List<Person> findAll() {
         return personDao.findAll();
+    }
+    
+    public Integer countAll() {
+        return personDao.countAll();
+    }
+    
+    public List<Person> findAll(SortParam s, int first, int count) {
+    	String sortOrder = "asc";
+    	if(!s.isAscending()) {
+    		sortOrder="desc";
+    	}
+        return personDao.findAll(sortOrder,s.getProperty().toString(), first, count);
+    }
+    
+    public List<Person> findAll(SortParam s, int first, int count,PersonFilter personFilter) {
+    	String sortOrder = "asc";
+    	if(!s.isAscending()) {
+    		sortOrder="desc";
+    	}
+        return personDao.findAll(sortOrder,s.getProperty().toString(), first, count,personFilter);
     }
  
     public void deleteAll() {

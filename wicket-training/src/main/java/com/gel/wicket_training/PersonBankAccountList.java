@@ -1,5 +1,6 @@
 package com.gel.wicket_training;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -13,6 +14,10 @@ public class PersonBankAccountList extends ListView<PersonBankAccount> {
 
 	public PersonBankAccountList(String id,Set<PersonBankAccount> model) {
 		super(id,model.stream().collect(Collectors.toList()));
+	}
+	
+	public PersonBankAccountList(String id,List<PersonBankAccount> model) {
+		super(id,model);
 	}
 
 	@Override
