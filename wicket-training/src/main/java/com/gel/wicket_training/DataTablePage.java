@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.wicket.extensions.ajax.markup.html.repeater.data.table.AjaxFallbackDefaultDataTable;
+import org.apache.wicket.extensions.markup.html.repeater.data.grid.ICellPopulator;
+import org.apache.wicket.extensions.markup.html.repeater.data.table.AbstractColumn;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.DataTable;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.DefaultDataTable;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.IColumn;
@@ -79,19 +82,28 @@ public class DataTablePage extends IndexPage
 	            item.add(new PersonBankAccountsCellPanel(componentId, model));
 	        }
 	    });
+		columns.add(new AbstractColumn<Person, String>(new ResourceModel("actions"))
+		{
+			@Override
+			public void populateItem(Item<ICellPopulator<Person>> cellItem, String componentId,
+				IModel<Person> model)
+			{
+				cellItem.add(new ActionPanel(componentId, model));
+			}
+		});
 		SortablePersonDataProvider dataProvider = new SortablePersonDataProvider(1,10);
-		DataTable<Person, String> dataTable = new DefaultDataTable<>("table", columns, dataProvider, 10);
-		
+		//DataTable<Person, String> dataTable = new DefaultDataTable<>("table", columns, dataProvider, 5);
+		AjaxFallbackDefaultDataTable ajaxDataTable = new AjaxFallbackDefaultDataTable<>("table", columns, dataProvider, 5);
 		FilterForm<PersonFilter> personFilter = new FilterForm<>("personFilter", dataProvider);
 		
 		personFilter.add(new TextField<>("firstName",PropertyModel.of(dataProvider, "filterState.firstName")));
 		personFilter.add(new TextField<>("lastName",PropertyModel.of(dataProvider, "filterState.lastName")));
 		
 		add(personFilter);
-		FilterToolbar filterToolBar = new FilterToolbar(dataTable,personFilter);
-		dataTable.addTopToolbar(filterToolBar);
-		dataTable.setOutputMarkupId(true);
-		personFilter.add(dataTable);
+		FilterToolbar filterToolBar = new FilterToolbar(ajaxDataTable,personFilter);
+		ajaxDataTable.addTopToolbar(filterToolBar);
+		ajaxDataTable.setOutputMarkupId(true);
+		personFilter.add(ajaxDataTable);
 		
 	}
 	

@@ -5,31 +5,32 @@ import java.util.List;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 
 import com.gel.wicket_training.entities.Person;
 import com.gel.wicket_training.service.PersonService;
 
-public class DeleteLink extends AjaxLink<Person> {
+public class NormalDeleteLink extends Link<Person> {
 
 	ListItem item;
 	Person person;
 	PersonList personList;
-	public DeleteLink(String id, ListItem<Person> item,PersonList personList) {
+	public NormalDeleteLink(String id, ListItem<Person> item,PersonList personList) {
 		super(id);
 		this.item = item;
 		this.person=item.getModelObject();
 		this.personList = personList;
 	}
 	
-	public DeleteLink(String id,Person person) {
+	public NormalDeleteLink(String id,Person person) {
 		super(id);
 		this.person = person;
 	}
 
 	
 	@Override
-	public void onClick(AjaxRequestTarget target) {
+	public void onClick() {
 		// TODO Auto-generated method stub
 		PersonService ps = new PersonService();
 		ps.openSession();
@@ -40,7 +41,6 @@ public class DeleteLink extends AjaxLink<Person> {
 		List<Person> persons = ps.findAll();
 		personList.setPersons(persons);
 		ps.closeSession();
-		target.add(getParent().getParent().getParent());
 	}
 
 }
